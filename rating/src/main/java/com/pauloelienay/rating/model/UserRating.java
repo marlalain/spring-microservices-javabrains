@@ -8,6 +8,6 @@ import java.util.List;
 @Data
 @Builder
 public class UserRating {
-    private int userId;
-    private List<Rating> ratings;
+	private int userId;
+	private List<Rating> ratings;
 }

@@ -8,6 +8,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Rating {
-    private int movieId;
-    private int rating;
+	private int movieId;
+	private int rating;
 }

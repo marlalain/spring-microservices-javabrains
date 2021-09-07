@@ -14,15 +14,15 @@ import java.util.List;
 @RequestMapping("ratings")
 public class RatingController {
 
-    @GetMapping("{userId}")
-    public UserRating getRatingByMovieId(@PathVariable int userId) {
-        List<Rating> ratings = Arrays.asList(
-                new Rating(1, 4),
-                new Rating(2, 2),
-                new Rating(3, 1)
-        );
-        return UserRating.builder()
-                .userId(userId)
-                .ratings(ratings).build();
-    }
+	@GetMapping("{userId}")
+	public UserRating getRatingByMovieId(@PathVariable int userId) {
+		List<Rating> ratings = Arrays.asList(
+			new Rating(1, 4),
+			new Rating(2, 2),
+			new Rating(3, 1)
+		);
+		return UserRating.builder()
+			.userId(userId)
+			.ratings(ratings).build();
+	}
 }
