@@ -3,4 +3,5 @@
 ## TODO
 
 - [ ] Implement a database to the application
-- [ ] Implement docker-compose/kubernetes
+- [x] Implement docker-compose
+- [ ] Implement kubernetes
