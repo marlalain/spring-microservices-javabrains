@@ -1,0 +1,63 @@
+# To create the required images, go to each microservice and run `mvn spring-boot:build-image`
+
+version: "3.8"
+services: 
+  discovery-service:
+    container_name: discovery-service
+    image: discovery:0.0.1-SNAPSHOT
+    ports: 
+      - "8761:8761"
+
+  movie-catalog-service:
+    container_name: movie-catalog-service
+    image: movie-catalog:0.0.1-SNAPSHOT
+    ports:
+      - "8000:8000"
+    environment: 
+      - SPRING_PROFILES_ACTIVE=docker
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka/
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on: 
+      - discovery-service
+    links:
+      - discovery-service
+
+  movie-info-service:
+    container_name: movie-info-service
+    image: movie-info-service:0.0.1-SNAPSHOT
+    ports:
+      - "8001:8001"
+    environment: 
+      - SPRING_PROFILES_ACTIVE=docker
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka/
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on: 
+      - discovery-service
+      - movie-catalog-service
+    links:
+      - discovery-service
+      - movie-catalog-service
+
+  rating-service:
+    container_name: rating-service
+    image: rating:0.0.1-SNAPSHOT
+    ports:
+      - "8002:8002"
+    environment: 
+      - SPRING_PROFILES_ACTIVE=docker
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka/
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on: 
+      - discovery-service
+      - movie-catalog-service
+      - movie-info-service
+    links:
+      - discovery-service
+      - movie-catalog-service
+      - movie-info-service
