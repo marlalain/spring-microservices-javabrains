@@ -8,13 +8,13 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class MovieCatalogApplication {
 
-    @Bean
-    public RestTemplate getRestTemplate() {
-        return new RestTemplate();
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(MovieCatalogApplication.class, args);
+	}
 
-    public static void main(String[] args) {
-        SpringApplication.run(MovieCatalogApplication.class, args);
-    }
+	@Bean
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
+	}
 
 }

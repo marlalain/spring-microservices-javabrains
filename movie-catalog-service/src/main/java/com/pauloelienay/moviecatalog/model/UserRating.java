@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class UserRating {
-    private List<Rating> ratings;
+	private List<Rating> ratings;
 }
