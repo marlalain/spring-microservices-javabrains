@@ -61,3 +61,25 @@ services:
       - discovery-service
       - movie-catalog-service
       - movie-info-service
+
+  gateway-service:
+    container_name: gateway-service
+    image: gateway-service:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    environment: 
+      - SPRING_PROFILES_ACTIVE=docker
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service:8761/eureka/
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on: 
+      - discovery-service
+      - movie-catalog-service
+      - movie-info-service
+      - rating-service
+    links:
+      - discovery-service
+      - movie-catalog-service
+      - movie-info-service
+      - rating-service
